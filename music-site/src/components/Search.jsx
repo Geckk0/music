@@ -8,7 +8,7 @@ function Search(){
     <div id="search-page">
         <h1>Search</h1>
         <input value={searchValue} onChange={(e)=>searchValueUpdateMethod(e.target.value)}/>
-        <div className="divider">a</div>
+        <div className="divider"></div>
     </div>
     </>
 }
