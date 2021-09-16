@@ -3,36 +3,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPause, faSyncAlt, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 function Home(){
-    const [playPauseButton, setPlayPauseButton] = useState(<button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>)
-    const [loopButton, setLoopButton] = useState(<button onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button>)
+    const [playing, setPlaying] = useState(false)
 
     function loadSong() {
+        setPlaying(true)
         window.player.loadVideoById("dQw4w9WgXcQ")
-        switchButton(true)
     }
 
     function play(){
-        switchButton(true)
+        setPlaying(true)
         window.player.playVideo()
     }
 
     function pause(){
-        switchButton(false)
+        setPlaying(false)
         window.player.pauseVideo()
-
     }
 
     function loop(){
         window.player.setLoop(true)
-    }
-
-    function switchButton(val) {
-        if(val == true){
-            setPlayPauseButton(<button onClick={pause}><FontAwesomeIcon icon={faPause}/></button>)
-        }
-        else if(val == false){
-            setPlayPauseButton(<button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>)
-        }
     }
 
     return <>
@@ -42,8 +31,8 @@ function Home(){
                 <button onClick={loadSong}>Play <br/> Random <br/> Song</button>
             </section>
             <div>
-                {playPauseButton}
-                {loopButton}
+                {playing ? <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
+                <button onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button>
             </div>
         </div>
     </>

@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react"
 
+import SongList from "./SongList"
+import ArtistList from "./ArtistList"
+import AlbumList from "./AlbumList"
+
 function Search(){
 
     const [searchValue, searchValueUpdateMethod] = useState('')
+    const [searchTerm, setSearchTerm] = useState(['search']);
     const [fullList, setFullList] = useState([]);
     const [shortSongList, setShortSongList] = useState([]);
     const [shortArtistList, setShortArtistList] = useState([]);
     const [shortAlbumList, setShortAlbumList] = useState([]);
-    const [noResult, setNoResult] = useState([]);
+    const [noResult, setNoResult] = useState(true);
 
-    const [searchTerm, setSearchTerm] = useState(['search']);
+    const [showSongs, setShowSongs] = useState([false]);
+    const [showArtists, setShowArtists] = useState([false]);
+    const [showAlbums, setShowAlbums] = useState([false]);
     var data, thumbnail60
 
     async function submitSearch() {
@@ -36,12 +43,11 @@ function Search(){
         let tempSong = []
         let tempArtist = []
         let tempAlbum = []
-        setNoResult("")
-        console.log(val)
-
+        setNoResult(false)
+        
         if(val.length < 1){
             setShortSongList(val.slice(0, 4))
-            setNoResult("No Search Results Found")
+            setNoResult(true)
         } 
         else if (searchTerm == 'search'){
             
@@ -51,15 +57,27 @@ function Search(){
             setShortSongList(tempSong.slice(0, 4))
             setShortArtistList(tempArtist.slice(0, 4))
             setShortAlbumList(tempAlbum.slice(0, 4))
+            setShowSongs(true)
+            setShowArtists(true)
+            setShowAlbums(true)
         }
         else if (searchTerm == 'songs'){
             setShortSongList(val.slice(0, 4))
+            setShowSongs(true)
+            setShowArtists(false)
+            setShowAlbums(false)
         }
         else if (searchTerm == 'artists'){
             setShortArtistList(val.slice(0, 4))
+            setShowArtists(true)
+            setShowSongs(false)
+            setShowAlbums(false)
         }
         else if (searchTerm == 'albums'){
             setShortAlbumList(val.slice(0, 4))
+            setShowAlbums(true)
+            setShowSongs(false)
+            setShowArtists(false)
         }
     }
 
@@ -99,13 +117,6 @@ function Search(){
         setSearchTerm('albums')
     }
 
-    function getThumbnail(val) {
-        val.map(thumbnail => {
-        if(thumbnail.width == 60){
-            thumbnail60 = <img src={thumbnail.url} alt="" />
-        }})
-    }
-
     return <>
     <div id="search-page">
         <h1>Search</h1>
@@ -122,40 +133,33 @@ function Search(){
 
         <div className="divider"></div>
 
-        <p>{noResult}</p>
+        {noResult ?
+            <p>No Search Results Found</p> :
+        <>
+            {showSongs ? 
+            <>
+                
+                <SongList shortSongList={shortSongList} fullList={fullList}/>
 
-        {shortSongList.length ? <h2>Songs</h2> : <h2>No Songs Found</h2>}
-        <article>
-            {shortSongList.map(content => (
-                <section key={content.videoId}>
-                    <div>
-                        {getThumbnail(content.thumbnails)}{thumbnail60}
-                    </div>
-                    
-                    <div>
-                        <h3>{content.name}</h3>
-                        <p>{content.artist.name}</p>
-                    </div>
-                </section>
-            ))}
-        </article>
+                <div className="divider"></div>
+            </> : <></> }
+            
+            {showArtists ? 
+            <>
+                
+                <ArtistList shortArtistList={shortArtistList} fullList={fullList}/>
 
-        <div className="divider"></div>
+                <div className="divider"></div>
+            </> : <></> }
 
-        {shortArtistList.length ? <h2>Artists</h2> : <h2>No Artists Found</h2>}
-        <article>
-            {shortArtistList.map(content => (
-                <section key={content.browseId}>
-                    <div>
-                        {getThumbnail(content.thumbnails)}{thumbnail60}
-                    </div>
-                    
-                    <div>
-                        <h2>{content.name}</h2>
-                    </div>
-                </section>
-            ))}
-        </article>
+            {showAlbums ? 
+            <>
+                
+                <AlbumList shortAlbumList={shortAlbumList} fullList={fullList}/>
+                
+                <div className="divider"></div>
+            </> : <></> }
+        </>}
         
         
         
