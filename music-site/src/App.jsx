@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import {
   BrowserRouter as Router,
@@ -16,8 +18,8 @@ function App() {
     <Router>
       <div>
         <nav>
-          <Link to="/">H</Link>
-          <Link to="/search">S</Link>
+          <Link to="/"><FontAwesomeIcon icon={faHome}/></Link>
+          <Link to="/search"><FontAwesomeIcon icon={faSearch}/></Link>
         </nav>
         <Switch>
           <Route path="/search">
@@ -30,7 +32,6 @@ function App() {
       </div>
     </Router>
   )
-    
 }
 
 export default App

@@ -1,32 +1,49 @@
-import React from "react"
+import React, { useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPause, faSyncAlt, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 function Home(){
+    const [playPauseButton, setPlayPauseButton] = useState(<button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>)
+    const [loopButton, setLoopButton] = useState(<button onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button>)
 
-    let player;
-
-    // gets called automatically when YouTube player loads
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('yt-player', {
-            height: '0',
-            width: '0',
-            videoId: 'JW5meKfy3fY',
-            events: {
-            'onStateChange': onPlayerStateChange,
-            }
-        });
+    function loadSong() {
+        window.player.loadVideoById("dQw4w9WgXcQ")
+        switchButton(true)
     }
 
-    // this function triggers when we change song in player
-    // can be used to update things, like counters
-    function onPlayerStateChange(event) {
-        if (event.data != YT.PlayerState.PLAYING) return
+    function play(){
+        switchButton(true)
+        window.player.playVideo()
+    }
+
+    function pause(){
+        switchButton(false)
+        window.player.pauseVideo()
+
+    }
+
+    function loop(){
+        window.player.setLoop(true)
+    }
+
+    function switchButton(val) {
+        if(val == true){
+            setPlayPauseButton(<button onClick={pause}><FontAwesomeIcon icon={faPause}/></button>)
+        }
+        else if(val == false){
+            setPlayPauseButton(<button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>)
+        }
     }
 
     return <>
         <div id="home-page">
                 <h1>Home</h1>
+            <section>
+                <button onClick={loadSong}>Play <br/> Random <br/> Song</button>
+            </section>
             <div>
-                <button >Do nothing</button>
+                {playPauseButton}
+                {loopButton}
             </div>
         </div>
     </>
