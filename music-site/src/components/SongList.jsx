@@ -1,4 +1,5 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 
 function SongList(data) {
 
@@ -13,11 +14,17 @@ function SongList(data) {
         }})
     }
 
+    const history = useHistory()
+
+    function goToArtist(id) {
+        history.push('/showartist/' + id)
+    }
+
     return <>
         {shortSongList.length ? <h2>Songs</h2> : <h2>No Songs Found</h2>}
         <article>
             {shortSongList.map(content => (
-                <section key={content.videoId}>
+                <section key={content.videoId} onClick={() => goToArtist(content.artist.browseId)}>
                     <div>
                         {getThumbnail(content.thumbnails)}{thumbnail60}
                     </div>

@@ -4,9 +4,11 @@ import { faPause, faSyncAlt, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 function Home(){
     const [playing, setPlaying] = useState(false)
+    const [loaded, setLoaded] = useState(false)
 
     function loadSong() {
         setPlaying(true)
+        setLoaded(true)
         window.player.loadVideoById("dQw4w9WgXcQ")
     }
 
@@ -26,12 +28,16 @@ function Home(){
 
     return <>
         <div id="home-page">
-                <h1>Home</h1>
+            <div><h1>Sample <p>Name</p></h1></div>
             <section>
                 <button onClick={loadSong}>Play <br/> Random <br/> Song</button>
             </section>
             <div>
-                {playing ? <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
+                {loaded ? 
+                <>
+                    {playing ? <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
+                </> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>};
+                
                 <button onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button>
             </div>
         </div>

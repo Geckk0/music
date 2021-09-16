@@ -28,16 +28,18 @@ body>div>div{
   height: 100vh;
   width: 100vw;
 }
+/*--------------------------------------Nav Bar--------------------------------------*/
 nav{
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
   height: 100vh;
-  width: 50px;
+  width: 55px;
+  min-width: 55px;
   background-image: linear-gradient(to top left, rgb(17, 0, 36), rgb(14, 10, 14));
 }
 nav>a{
-  font-size: calc(120% + 0.7vw);
+  font-size: calc(140% + 0.5vw);
   color: white;
   padding: 1vh 0;
   text-decoration: none;
@@ -46,12 +48,19 @@ nav>a{
 nav>a:last-of-type{
   flex-grow: 1;
 }
+/*--------------------------------------Home Page--------------------------------------*/
 #home-page{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-image: linear-gradient(to bottom right, rgb(17, 0, 36), rgb(46, 37, 46));
+  overflow-x: hidden
+}
+#home-page>div>h1>p{
+  font-size: 53%;
+  text-align: right;
+  margin-top: -0.9vw;
 }
 #home-page>section{
   flex-grow: 1;
@@ -65,7 +74,7 @@ nav>a:last-of-type{
   border: none;
   width: calc(300px + 20vw);
   height: calc(300px + 20vw);
-  max-width: 100vw;
+  max-width: calc(100vw - 55px);
   border-radius: 50vw;
   font-size: calc(120% + 4vw);
 }
@@ -83,8 +92,9 @@ nav>a:last-of-type{
   width: calc(40px + 3vw);
   height: calc(40px + 3vw);
   border-radius: 10vw;
-  font-size: calc(30% + 2vw);
+  font-size: calc(100% + 0.7vw);
 }
+/*--------------------------------------Search Page--------------------------------------*/
 #search-page{
   flex-grow: 1;
   display: flex;
@@ -187,7 +197,28 @@ nav>a:last-of-type{
   width: 80%;
   height: 1px;
   border-bottom: 1px dashed rgb(46, 37, 46);
-  margin: 2vh 0;
+  margin: 1vh 0;
+}
+/*--------------------------------------Artist Page--------------------------------------*/
+#Artist-page{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, rgb(17, 0, 36), rgb(46, 37, 46));
+  overflow-x: hidden
+}
+#Artist-page>img{
+  height: 225px;
+  width: 225px;
+  object-fit: none;
+  border-radius: 100%;
+}
+#Artist-page>h2{
+  font-size: calc(130% + 1vw);
+  color: white;
+  margin-left: 10vw;
+  margin: 1vh 0;
 }
 @media (max-width: 400px) { 
   body>div>div{
@@ -203,5 +234,8 @@ nav>a:last-of-type{
   nav>a{
     flex-grow: 1;
     margin: 0 5vw;
+  }
+  #home-page>section>button{
+    max-width: calc(100vw - 10px);
   }
 }
