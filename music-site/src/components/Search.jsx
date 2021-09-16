@@ -17,7 +17,7 @@ function Search(){
     const [showSongs, setShowSongs] = useState([false]);
     const [showArtists, setShowArtists] = useState([false]);
     const [showAlbums, setShowAlbums] = useState([false]);
-    var data, thumbnail60
+    var data
 
     async function submitSearch() {
         let search = searchValue
@@ -138,7 +138,7 @@ function Search(){
         <>
             {showSongs ? 
             <>
-                
+
                 <SongList shortSongList={shortSongList} fullList={fullList}/>
 
                 <div className="divider"></div>

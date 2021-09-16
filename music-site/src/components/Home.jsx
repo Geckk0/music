@@ -36,8 +36,8 @@ function Home(){
                 {loaded ? 
                 <>
                     {playing ? <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
-                </> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>};
-                
+                </> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
+
                 <button onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button>
             </div>
         </div>

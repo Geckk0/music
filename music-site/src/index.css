@@ -185,22 +185,22 @@ nav>a:last-of-type{
 #search-page>article>section>div>h3{
   font-size: calc(90% + 0.4vw);
   margin: 0.5vh 0.5vw;
-  max-height: 24px;
+  max-height: calc(16px + 2vw);
   overflow: hidden;
 }
 #search-page>article>section>div>p{
   margin: 0.5vh 0.5vw;
-  max-height: 24px;
+  max-height: calc(16px + 2vw);
   overflow: hidden;
 }
 .divider{
-  width: 80%;
+  width: 75vw;
   height: 1px;
   border-bottom: 1px dashed rgb(46, 37, 46);
   margin: 1vh 0;
 }
 /*--------------------------------------Artist Page--------------------------------------*/
-#Artist-page{
+#artist-page{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -208,17 +208,39 @@ nav>a:last-of-type{
   background-image: linear-gradient(to bottom right, rgb(17, 0, 36), rgb(46, 37, 46));
   overflow-x: hidden
 }
-#Artist-page>img{
+#artist-page>img{
   height: 225px;
   width: 225px;
   object-fit: none;
   border-radius: 100%;
 }
-#Artist-page>h2{
+#artist-page>h2{
   font-size: calc(130% + 1vw);
   color: white;
   margin-left: 10vw;
   margin: 1vh 0;
+}
+#artist-page>section{
+  width: 80vw;
+  height: 60px;
+  background-color: rgba(102, 105, 114, 0.8);
+  margin: 0.5vh 0;
+  border-radius: calc(6px + 0.6vw);
+  display: flex;
+  align-items: center;
+}
+#artist-page>section>div{
+  padding-left: 1vw;
+}
+#artist-page>section>div>h3{
+  font-size: calc(100% + 0.6vw);
+  max-height: calc(16px + 2vw);
+  overflow: hidden;
+}
+#artist-page>section>div>p{
+  font-size: calc(100% + 0.2vw);
+  max-height: calc(16px + 2vw);
+  overflow: hidden;
 }
 @media (max-width: 400px) { 
   body>div>div{
