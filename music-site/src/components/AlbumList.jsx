@@ -15,7 +15,7 @@ function AlbumList(data) {
 
     return <>
         {shortAlbumList.length ? <h2>Albums</h2> : <h2>No Albums Found</h2>}
-        <article>
+        <article id="show-lists">
             {shortAlbumList.map(content => (
                 <section key={content.browseId}>
                     <div>

@@ -1,29 +1,16 @@
-import React, { useState } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPause, faSyncAlt, faPlay } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useContext } from "react"
+import { Context } from '../App'
 
 function Home(){
-    const [playing, setPlaying] = useState(false)
-    const [loaded, setLoaded] = useState(false)
+    const [context, updateContext] = useContext(Context)
 
     function loadSong() {
-        setPlaying(true)
-        setLoaded(true)
-        window.player.loadVideoById("dQw4w9WgXcQ")
-    }
-
-    function play(){
-        setPlaying(true)
-        window.player.playVideo()
-    }
-
-    function pause(){
-        setPlaying(false)
-        window.player.pauseVideo()
-    }
-
-    function loop(){
-        window.player.setLoop(true)
+        updateContext({
+            isLoaded: true,
+            isPlaying: true,
+            isPlayingId: "dQw4w9WgXcQ"
+        })
+        window.player.loadPlaylist("dQw4w9WgXcQ")
     }
 
     return <>
@@ -32,14 +19,6 @@ function Home(){
             <section>
                 <button onClick={loadSong}>Play <br/> Random <br/> Song</button>
             </section>
-            <div>
-                {loaded ? 
-                <>
-                    {playing ? <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
-                </> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
-
-                <button onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button>
-            </div>
         </div>
     </>
 }

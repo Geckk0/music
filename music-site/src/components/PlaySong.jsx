@@ -1,15 +1,16 @@
-import React, { useState,useEffect } from "react"
+import React, { useState, useContext, useEffect } from "react"
+import { Context } from '../App'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 function PlaySong(data){
-    
-    const [playing, setPlaying] = useState(false)
-    const [loaded, setLoaded] = useState(false)
+    const [context, updateContext] = useContext(Context)
+    const [songId, setSongId] = useState()
 
-    var parseData, songId
+    var parseData
     var song = data.song
     var artist = data.artist
+    var artistSongs = data.artistSongs
 
     useEffect(async ()=>{
         await fetch('https://yt-music-api.herokuapp.com/api/yt/songs/' + song.name)
@@ -20,41 +21,45 @@ function PlaySong(data){
     })
 
     function findSong(val) {
-        val.content.map(song => {
-            if(song.artist.name == artist && !songId){
-                songId = song.videoId
-                console.log(song.name)
+        val.content.map(content => {
+            if(content.artist.name == artist && !songId && content.name == song.name){
+                setSongId(content.videoId)
             }
         })
     }
 
     function firstPlay(val){
-        window.player.loadVideoById(val)
-        setLoaded(true)
-        setPlaying(true)
+        updateContext({
+            isLoaded: true,
+            isPlaying: true,
+            isPlayingId: val,
+            videoLength: window.player.getDuration()
+        })
+        window.player.loadPlaylist(val)
         window.player.playVideo()
+        window.player.setLoop(loopPlaylist)
     }
     function play(){
-        setPlaying(true)
+        updateContext({
+            isPlaying: true
+        })
         window.player.playVideo()
     }
 
     function pause(){
-        setPlaying(false)
+        updateContext({
+            isPlaying: false
+        })
         window.player.pauseVideo()
     }
 
     return <>
-            {loaded ? 
+        <div id="player">
+            {context.isLoaded && context.isPlayingId == songId ? 
             <>
-                {playing ? <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
+                {context.isPlaying && context.isPlayingId == songId ? <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> : <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
             </> : <button onClick={() => firstPlay(songId)}><FontAwesomeIcon icon={faPlay}/></button>}
-
-            <div>
-                <h3>{song.name}</h3>
-                <p>{song.album.name}</p>
-            </div>
-
+        </div>
     </>
 }
 
