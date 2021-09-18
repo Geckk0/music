@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import PlaySong from "./PlaySong"
+import ArtistSongList from "./ArtistSongList"
 
 function ShowArtist() {
 
@@ -8,9 +9,10 @@ function ShowArtist() {
     const [artistSongs, setArtistSongs] = useState([])
     const [artistAlbums, setArtistAlbums] = useState([])
     const [thumbnail816, setThumbnail816] = useState()
+    const [showMoreSongs, setShowMoreSongs] = useState(false)
 
     var { id } = useParams()
-    var data
+    var data, thumbnail226
     var number = 0
 
     useEffect(async ()=>{
@@ -20,7 +22,6 @@ function ShowArtist() {
             if(data.products)setArtistAlbums(data.products.albums.content)
             if(data.products)setArtistSongs(data.products.songs.content)
             setArtist(data)
-            console.log(data)
         })
         .catch(error => console.log(error))
         getImage(data)
@@ -37,6 +38,23 @@ function ShowArtist() {
         else setThumbnail816(<img style={{objectFit: "cover"}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png" alt="" />)
     }
 
+    function getThumbnail(thumbnails) {
+        thumbnails.map(thumbnail => {
+            if(thumbnail.width == 226){
+                thumbnail226 = <img src={thumbnail.url} alt="" />
+            }})
+    }
+
+    function toggleSongs(){
+        setShowMoreSongs(!showMoreSongs)
+    }
+
+    const history = useHistory()
+
+    function goToAlbum(id) {
+        history.push('/showalbum/' + id)
+    }
+
     return <>
         <div id='artist-page'>
             {thumbnail816}
@@ -44,9 +62,16 @@ function ShowArtist() {
 
             <div className="divider"></div>
 
+            {artistSongs.length ? 
+            <div>
+                <h2>Top Songs</h2> 
+                <> </>
+            </div>
+            : <h2>No Songs Found</h2>}
+
             {artistSongs.map(song => (
-                <section key={number = number + 1}>
-                    <PlaySong song={song} artist={artist.name} artistSongs={artistSongs}/>
+                <section key={number = number + 1} style={{"--order": number}}>
+                    <PlaySong song={song} artist={artist.name}/>
 
                     <div>
                         <h3>{song.name}</h3>
@@ -54,11 +79,34 @@ function ShowArtist() {
                     </div>
                 </section>
             ))}
+            {artistSongs.length == 5 ? <>
+                {showMoreSongs ? 
+                <article>
+                        <ArtistSongList artist={artist.name}/>
+                    <a onClick={toggleSongs}>Show Less Songs</a>
+                </article> 
+                : <a onClick={toggleSongs}>Show More Songs</a> }
+                </>: <> </>}
 
             <div className="divider"></div>
 
+            {artistAlbums.length ? 
+            <div>
+                <h2>Albums</h2> 
+                <> </>
+            </div>
+            : <h2>No Albums Found</h2>}
+
             {artistAlbums.map(album => (
-                <section key={number = number + 1}>
+                <section key={number = number + 1} style={{"--order": number}}>
+                    <div>
+                        {getThumbnail(album.thumbnails)} {thumbnail226}
+                    </div>
+                    
+                    <div /*onClick={() => goToAlbum(album.browseId)}*/>
+                        <h3>{album.name}</h3>
+                        <p>{artist.name}</p>
+                    </div>
                 </section>
             ))}
                 

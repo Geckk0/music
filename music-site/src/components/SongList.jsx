@@ -6,7 +6,7 @@ function SongList(data) {
 
     var thumbnail60
     var shortSongList = data.shortSongList
-    var fullList = data.fullList
+    var number = 0
     
     function getThumbnail(val) {
         val.map(thumbnail => {
@@ -25,11 +25,11 @@ function SongList(data) {
         {shortSongList.length ? <h2>Songs</h2> : <h2>No Songs Found</h2>}
         <article id="show-lists">
             {shortSongList.map(content => (
-                <section key={content.videoId}>
+                <section key={number = number + 1} style={{"--order": number}}>
                     <div>
                         {getThumbnail(content.thumbnails)}{thumbnail60}
                         <div>
-                            <PlaySong song={content} artist={content.artist.name}/>
+                            <PlaySong isPlaylist={false} song={content} artist={content.artist.name}/>
                         </div>
                     </div>
                     

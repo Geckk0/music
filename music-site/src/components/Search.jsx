@@ -25,6 +25,8 @@ function Search(){
 
         setFullList([])
         setShortSongList([])
+        setShortArtistList([])
+        setShortAlbumList([])
         
         if(search != ''){
             await fetch('https://yt-music-api.herokuapp.com/api/yt/' + term + '/' + search)
@@ -147,7 +149,7 @@ function Search(){
             {showSongs ? 
             <>
 
-                <SongList shortSongList={shortSongList} fullList={fullList}/>
+                <SongList shortSongList={shortSongList}/>
 
                 <div className="divider"></div>
             </> : <></> }
@@ -155,7 +157,7 @@ function Search(){
             {showArtists ? 
             <>
                 
-                <ArtistList shortArtistList={shortArtistList} fullList={fullList}/>
+                <ArtistList shortArtistList={shortArtistList}/>
 
                 <div className="divider"></div>
             </> : <></> }
@@ -163,10 +165,11 @@ function Search(){
             {showAlbums ? 
             <>
                 
-                <AlbumList shortAlbumList={shortAlbumList} fullList={fullList}/>
+                <AlbumList shortAlbumList={shortAlbumList}/>
                 
                 <div className="divider"></div>
             </> : <></> }
+
         </>}
         
         

@@ -5,7 +5,7 @@ function ArtistList(data) {
 
     var thumbnail60
     var shortArtistList = data.shortArtistList
-    var fullList = data.fullList
+    var number = 0
     
     function getThumbnail(val) {
         val.map(thumbnail => {
@@ -24,7 +24,7 @@ function ArtistList(data) {
         {shortArtistList.length ? <h2>Artists</h2> : <h2>No Artists Found</h2>}
         <article id="show-lists">
             {shortArtistList.map(content => (
-                <section key={content.browseId} onClick={() => goToArtist(content.browseId)}>
+                <section key={number = number + 1} onClick={() => goToArtist(content.browseId)} style={{"--order": number}}>
                     <div>
                         {getThumbnail(content.thumbnails)}{thumbnail60}
                     </div>

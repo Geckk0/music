@@ -11,7 +11,7 @@ import {
 
 import Home from './components/Home.jsx'
 import Search from './components/Search.jsx'
-import ShowArtist from './components/ShowArtist.jsx';
+import ShowArtist from './components/ShowArtist.jsx'
 import PlayBar from './components/PlayBar.jsx'
 
 export const Context = createContext()
@@ -22,7 +22,7 @@ function App() {
     isLoaded: false,
     isPlaying: false,
     isPlayingId: '',
-    volume: 5,
+    volume: 10,
     loopPlaylist: false
   })
 

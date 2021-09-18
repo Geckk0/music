@@ -15,7 +15,7 @@ function Home(){
 
     return <>
         <div id="home-page">
-            <div><h1>Sample <p>Name</p></h1></div>
+            <img src="\src\images\jespersljudio.png" alt="Sample Name" />
             <section>
                 <button onClick={loadSong}>Play <br/> Random <br/> Song</button>
             </section>
