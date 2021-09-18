@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react"
 import { Context } from '../App'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPause, faSyncAlt, faPlay, faVolumeDown, faVolumeUp } from "@fortawesome/free-solid-svg-icons"
+import { faPause, faSyncAlt, faPlay, faVolumeDown, faVolumeUp, faAngleDoubleRight, faAngleDoubleLeft, faRandom } from "@fortawesome/free-solid-svg-icons"
 
 function PlayBar(){
     const [context, updateContext] = useContext(Context)
@@ -31,6 +31,21 @@ function PlayBar(){
             loopPlaylist: !context.loopPlaylist
         })
         window.player.setLoop(!context.loopPlaylist)
+    }
+    
+    function shuffle(){ 
+        updateContext({
+            shufflePlaylist: !context.shufflePlaylist
+        })
+        window.player.setShuffle(!context.shufflePlaylist)
+    }
+
+    function jumpNext(){ 
+        window.player.nextVideo()
+    }
+
+    function jumpPrev(){ 
+        window.player.previousVideo()
     }
 
     function changeVolume(val){
@@ -87,15 +102,32 @@ function PlayBar(){
                 <input className="played-slider" type="range" min="0" max={window.player.getDuration()} value={videoTime} onChange={(e) => updateTime(e.target.value)}/>
             </div>
             <div>
-                {context.loopPlaylist ? 
-                <button className="inactive" onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button> : 
-                <button className="active" onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button>}
+
+                <div>
+                    {context.shufflePlaylist ? 
+                        <button className="inactive" onClick={shuffle}><FontAwesomeIcon icon={faRandom}/></button> 
+                        : 
+                        <button className="active" onClick={shuffle}><FontAwesomeIcon icon={faRandom}/></button>
+                    }
+                    {context.loopPlaylist ? 
+                        <button className="inactive" onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button> 
+                        : 
+                        <button className="active" onClick={loop}><FontAwesomeIcon icon={faSyncAlt}/></button>
+                    }
+                </div>
+                
                 
                 <div>
+                    <button className="active" onClick={jumpPrev}><FontAwesomeIcon icon={faAngleDoubleLeft}/></button>
+
                     {context.isPlaying ? 
-                    <button className="active" onClick={pause}><FontAwesomeIcon icon={faPause}/></button> : 
-                    <button className="active" onClick={play}><FontAwesomeIcon icon={faPlay}/></button>}
+                        <button className="active" onClick={pause}><FontAwesomeIcon icon={faPause}/></button> 
+                        : 
+                        <button className="active" onClick={play}><FontAwesomeIcon icon={faPlay}/></button>
+                    }
                     <p>{playedMinutes}:{playedSeconds} / {totalMinutes}:{totalSeconds}</p>
+
+                    <button className="active" onClick={jumpNext}><FontAwesomeIcon icon={faAngleDoubleRight}/></button>
                 </div>
                 
                 <div>

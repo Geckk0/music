@@ -23,7 +23,8 @@ function App() {
     isPlaying: false,
     isPlayingId: '',
     volume: 10,
-    loopPlaylist: false
+    loopPlaylist: false,
+    shufflePlaylist: false
   })
 
   function updateContext(updates) {

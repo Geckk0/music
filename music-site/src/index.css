@@ -97,6 +97,7 @@ nav>a:last-of-type{
   height: 50px;
   border-radius: 10vw;
   font-size: calc(100% + 0.5vw);
+  margin: 0 0.5vw;
 }
 .active{
   background-color: rgba(102, 105, 114, 0.4);
