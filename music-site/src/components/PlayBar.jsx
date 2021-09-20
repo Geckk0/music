@@ -16,43 +16,43 @@ function PlayBar(){
         updateContext({
             isPlaying: true
         })
-        window.player.playVideo()
+        player.playVideo()
     }
 
     function pause(){
         updateContext({
             isPlaying: false
         })
-        window.player.pauseVideo()
+        player.pauseVideo()
     }
 
     function loop(){ 
         updateContext({
             loopPlaylist: !context.loopPlaylist
         })
-        window.player.setLoop(!context.loopPlaylist)
+        player.setLoop(!context.loopPlaylist)
     }
     
     function shuffle(){ 
         updateContext({
             shufflePlaylist: !context.shufflePlaylist
         })
-        window.player.setShuffle(!context.shufflePlaylist)
+        player.setShuffle(!context.shufflePlaylist)
     }
 
     function jumpNext(){ 
-        window.player.nextVideo()
+        player.nextVideo()
     }
 
     function jumpPrev(){ 
-        window.player.previousVideo()
+        player.previousVideo()
     }
 
     function changeVolume(val){
         updateContext({
             volume: val
         })
-        window.player.setVolume(context.volume)
+        player.setVolume(context.volume)
     }
     
     useEffect(() => {
@@ -61,8 +61,8 @@ function PlayBar(){
         if (context.isPlaying) {
           intervalId = setInterval(() => {
             
-            const totSecondCounter = Math.floor(window.player.getDuration() % 60)
-            const totMinuteCounter = Math.floor(window.player.getDuration() / 60)
+            const totSecondCounter = Math.floor(player.getDuration() % 60)
+            const totMinuteCounter = Math.floor(player.getDuration() / 60)
 
             const totComputedSecond = String(totSecondCounter).length === 1 ? `0${totSecondCounter}`: totSecondCounter
             const totComputedMinute = String(totMinuteCounter)
@@ -70,8 +70,8 @@ function PlayBar(){
             setTotalSeconds(totComputedSecond)
             setTotalMinutes(totComputedMinute)
             
-            const secondCounter = Math.floor(window.player.getCurrentTime() % 60)
-            const minuteCounter = Math.floor(window.player.getCurrentTime() / 60)
+            const secondCounter = Math.floor(player.getCurrentTime() % 60)
+            const minuteCounter = Math.floor(player.getCurrentTime() / 60)
 
             const computedSecond = String(secondCounter).length === 1 ? `0${secondCounter}`: secondCounter
             const computedMinute = String(minuteCounter)
@@ -79,9 +79,9 @@ function PlayBar(){
             setPlayedSeconds(computedSecond)
             setPlayedMinutes(computedMinute)
 
-            setVideoTime(window.player.getCurrentTime())
+            setVideoTime(player.getCurrentTime())
 
-            if(window.player.getCurrentTime() == window.player.getDuration() && context.loopPlaylist == false && context.isPlayingId.length < 2){
+            if(player.getCurrentTime() == player.getDuration() && context.loopPlaylist == false && context.isPlayingId.length < 2){
                 pause()
             }
 
@@ -92,14 +92,14 @@ function PlayBar(){
     }, [context.isPlaying, context.loopPlaylist, context.isPlayingId])
 
     function updateTime(val){
-        window.player.seekTo(val, true)
+        player.seekTo(val, true)
         setVideoTime(val)
     }
 
     return <>
         <section id="play-bar">
             <div>  
-                <input className="played-slider" type="range" min="0" max={window.player.getDuration()} value={videoTime} onChange={(e) => updateTime(e.target.value)}/>
+                <input className="played-slider" type="range" min="0" max={player.getDuration()} value={videoTime} onChange={(e) => updateTime(e.target.value)}/>
             </div>
             <div>
 

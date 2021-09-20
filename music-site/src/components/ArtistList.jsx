@@ -25,16 +25,16 @@ function ArtistList(data) {
         {shortArtistList.length ? <h2>Artists</h2> : <h2>No Artists Found</h2>}
         <article id="show-lists">
             {shortArtistList.map(content => (
-                <section key={number = number + 1} onClick={() => goToArtist(content.browseId)} style={{"--order": number}}>
+                <section key={number = number + 1} style={{"--order": number}}>
                     <div className="thumbnail">
                         {getThumbnail(content.thumbnails)}{thumbnail60}
                     </div>
                     
-                    <div className="content">
+                    <div className="content" onClick={() => goToArtist(content.browseId)}>
                         <h2>{content.name}</h2>
                     </div>
-
-                    <ShareLinks />
+                    
+                    <ShareLinks artistId={content.browseId}/>
                 </section>
             ))}
         </article>

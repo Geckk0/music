@@ -28,8 +28,6 @@ function AlbumList(data) {
                         <h2>{content.name}</h2>
                         <p>{content.artist}</p>
                     </div>
-
-                    <ShareLinks />
                 </section>
             ))}
         </article>

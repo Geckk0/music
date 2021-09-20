@@ -1,4 +1,4 @@
-import React, {createContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons"
 
@@ -12,6 +12,7 @@ import {
 import Home from './components/Home.jsx'
 import Search from './components/Search.jsx'
 import ShowArtist from './components/ShowArtist.jsx'
+import ShowSong from './components/ShowSong.jsx'
 import PlayBar from './components/PlayBar.jsx'
 
 export const Context = createContext()
@@ -48,6 +49,9 @@ function App() {
           <Switch>
             <Route path="/showartist/:id">
               <ShowArtist/>
+            </Route>
+            <Route path="/showsong/:name/:artist">
+              <ShowSong/>
             </Route>
             <Route path="/search">
               <Search/>

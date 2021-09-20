@@ -52,8 +52,11 @@ function ShowArtist() {
 
     const history = useHistory()
 
-    function goToAlbum(id) {
-        history.push('/showalbum/' + id)
+    function goToSong(name, artist) {
+        if(artist.length > 1){
+            artist = artist[0]
+        }
+        history.push('/showsong/' + name + '/' + artist.name)
     }
 
     return <>
@@ -74,18 +77,18 @@ function ShowArtist() {
                 <section key={number = number + 1} style={{"--order": number}}>
                     <PlaySong song={song} artist={artist.name}/>
 
-                    <div>
+                    <div style={{cursor: "pointer"}} onClick={() => goToSong(song.name, song.artist)}>
                         <h3>{song.name}</h3>
                         <p>{song.album.name}</p>
                     </div>
 
-                    <ShareLinks />
+                    <ShareLinks artistId={id} songName={song.name} artistName={song.artist.name}/>
                 </section>
             ))}
             {artistSongs.length == 5 ? <>
                 {showMoreSongs ? 
                 <article>
-                        <ArtistSongList artist={artist.name}/>
+                    <ArtistSongList artist={artist.name}/>
                     <a onClick={toggleSongs}>Show Less Songs</a>
                 </article> 
                 : <a onClick={toggleSongs}>Show More Songs</a> }
@@ -106,12 +109,10 @@ function ShowArtist() {
                         {getThumbnail(album.thumbnails)} {thumbnail226}
                     </div>
                     
-                    <div /*onClick={() => goToAlbum(album.browseId)}*/>
+                    <div>
                         <h3>{album.name}</h3>
                         <p>{artist.name}</p>
                     </div>
-
-                    <ShareLinks />
                 </section>
             ))}
                 

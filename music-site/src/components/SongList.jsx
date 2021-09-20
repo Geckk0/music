@@ -38,8 +38,8 @@ function SongList(data) {
                         <h3>{content.name}</h3>
                         <p>{content.artist.name}</p>
                     </div>
-
-                    <ShareLinks />
+                    
+                    <ShareLinks artistId={content.artist.browseId} songName={content.name} artistName={content.artist.name}/>
                 </section>
             ))}
         </article>

@@ -42,24 +42,24 @@ function PlaySong(data){
             isLoaded: true,
             isPlaying: true,
             isPlayingId: val,
-            videoLength: window.player.getDuration()
+            videoLength: player.getDuration()
         })
-        window.player.loadPlaylist(val)
-        window.player.playVideo()
-        window.player.setLoop(context.loopPlaylist)
+        player.loadPlaylist(val)
+        player.playVideo()
+        player.setLoop(context.loopPlaylist)
     }
     function play(){
         updateContext({
             isPlaying: true
         })
-        window.player.playVideo()
+        player.playVideo()
     }
 
     function pause(){
         updateContext({
             isPlaying: false
         })
-        window.player.pauseVideo()
+        player.pauseVideo()
     }
 
     return <>

@@ -10,7 +10,7 @@ function Home(){
             isPlaying: true,
             isPlayingId: "dQw4w9WgXcQ"
         })
-        window.player.loadPlaylist("dQw4w9WgXcQ")
+        player.loadPlaylist("dQw4w9WgXcQ")
     }
 
     return <>

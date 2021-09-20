@@ -1,5 +1,5 @@
-import { faFileContract } from "@fortawesome/free-solid-svg-icons"
 import React, { useState, useEffect } from "react"
+import { useHistory } from "react-router-dom"
 import PlaySong from "./PlaySong"
 
 function ArtistSongList(data) {
@@ -32,6 +32,13 @@ const [playlist, setPlaylist] = useState([])
         }})
     }
 
+    const history = useHistory()
+
+    function goToSong(name, artist) {
+        if(artist.length > 1) artist = artist[0]
+        history.push('/showsong/' + name + '/' + artist.name)
+    }
+
     return <>
         {songList.length ? 
         <div>
@@ -42,14 +49,14 @@ const [playlist, setPlaylist] = useState([])
         <article id="show-lists">
             {songList.map(content => (
                 <section key={number = number + 1} style={{"--order": number}}>
-                    <div>
+                    <div className="thumbnail">
                         {getThumbnail(content.thumbnails)}{thumbnail60}
                         <div>
                             <PlaySong song={content} artist={content.artist.name}/>
                         </div>
                     </div>
                     
-                    <div onClick={() => goToArtist(content.artist.browseId)}>
+                    <div className="content" onClick={() => goToSong(content.name, content.artist)}>
                         <h3>{content.name}</h3>
                         <p>{content.artist.name}</p>
                     </div>
