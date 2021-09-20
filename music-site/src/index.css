@@ -68,7 +68,7 @@ nav>a{
   text-decoration: none;
   text-align: center;
 }
-nav>a:last-of-type{
+nav>.empty-space{
   flex-grow: 1;
 }
 /*--------------------------------------Play Bar--------------------------------------*/
@@ -272,6 +272,7 @@ input[type=range].played-slider::-webkit-slider-thumb{
   animation: slideIn 1s ease forwards;
   animation-delay: calc(var(--order) * 100ms);
   opacity: 0;
+  cursor: pointer;
 }
 #show-lists>section>div{
   display: flex;
@@ -286,11 +287,11 @@ input[type=range].played-slider::-webkit-slider-thumb{
   position: sticky;
   opacity: 0.8;
 }
-#show-lists>section>div:first-of-type{
+#show-lists>section>.thumbnail{
   flex-grow: 0;
   flex-shrink: 0;
 }
-#show-lists>section>div:last-of-type{
+#show-lists>section>.content{
   flex-grow: 1;
   flex-shrink: 1;
   display: flex;
@@ -374,14 +375,14 @@ input[type=range].played-slider::-webkit-slider-thumb{
   display: flex;
   flex-direction: column;
 }
+#artist-page>section>div:nth-child(2){
+  flex-grow: 1;
+  text-align: left;
+}
 #artist-page>section>div>img{
   width: 60px;
   border-top-left-radius: calc(6px + 0.6vw);
   border-bottom-left-radius: calc(6px + 0.6vw);
-}
-#artist-page>section>div:last-of-type{
-  flex-grow: 1;
-  text-align: left;
 }
 #artist-page>section>div>h3{
   font-size: calc(100% + 0.6vw);
@@ -409,9 +410,21 @@ input[type=range].played-slider::-webkit-slider-thumb{
   margin: 5px;
   flex-shrink: 0;
 }
+/*--------------------------------------Share Links--------------------------------------*/
+#share-links{
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media (max-width: 600px) { 
 #show-lists>section{
-    width: 80vw
+    width: 90vw
+  }
+  #play-bar>div>.volume{
+    display: none;
   }
 }
 @media (max-width: 400px) { 

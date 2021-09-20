@@ -40,6 +40,7 @@ function App() {
         <div>
           <nav>
             <Link to="/"><FontAwesomeIcon icon={faHome}/></Link>
+            <a className="empty-space"/>
             <Link to="/search"><FontAwesomeIcon icon={faSearch}/></Link>
           </nav>
           <div>

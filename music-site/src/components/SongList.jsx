@@ -1,6 +1,7 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
 import PlaySong from "./PlaySong"
+import ShareLinks from "./ShareLinks"
 
 function SongList(data) {
 
@@ -26,17 +27,19 @@ function SongList(data) {
         <article id="show-lists">
             {shortSongList.map(content => (
                 <section key={number = number + 1} style={{"--order": number}}>
-                    <div>
+                    <div className="thumbnail">
                         {getThumbnail(content.thumbnails)}{thumbnail60}
                         <div>
                             <PlaySong isPlaylist={false} song={content} artist={content.artist.name}/>
                         </div>
                     </div>
                     
-                    <div onClick={() => goToArtist(content.artist.browseId)}>
+                    <div className="content" onClick={() => goToArtist(content.artist.browseId)}>
                         <h3>{content.name}</h3>
                         <p>{content.artist.name}</p>
                     </div>
+
+                    <ShareLinks />
                 </section>
             ))}
         </article>

@@ -65,20 +65,20 @@ function Search(){
             setShowAlbums(true)
         }
         else if (searchTerm == 'songs'){
-            setShortSongList(val.slice(0, 4))
+            setShortSongList(val)
             setShowSongs(true)
             setShowArtists(false)
             setShowAlbums(false)
         }
         else if (searchTerm == 'artists'){
-            setShortArtistList(val.slice(0, 4))
+            setShortArtistList(val)
             setShowArtists(true)
             setShowSongs(false)
             setShowAlbums(false)
         }
         else if (searchTerm == 'albums'){
             console.log(val)
-            setShortAlbumList(val.slice(0, 4))
+            setShortAlbumList(val)
             setShowAlbums(true)
             setShowSongs(false)
             setShowArtists(false)

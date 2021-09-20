@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useParams, useHistory } from "react-router-dom"
 import PlaySong from "./PlaySong"
 import ArtistSongList from "./ArtistSongList"
+import ShareLinks from "./ShareLinks"
 
 function ShowArtist() {
 
@@ -77,6 +78,8 @@ function ShowArtist() {
                         <h3>{song.name}</h3>
                         <p>{song.album.name}</p>
                     </div>
+
+                    <ShareLinks />
                 </section>
             ))}
             {artistSongs.length == 5 ? <>
@@ -107,6 +110,8 @@ function ShowArtist() {
                         <h3>{album.name}</h3>
                         <p>{artist.name}</p>
                     </div>
+
+                    <ShareLinks />
                 </section>
             ))}
                 

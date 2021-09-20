@@ -37,7 +37,7 @@ function PlaySong(data){
         }
     }
 
-    function firstPlay(val){
+    function load(val){
         updateContext({
             isLoaded: true,
             isPlaying: true,
@@ -74,7 +74,7 @@ function PlaySong(data){
                     }
                 </> 
                 : 
-                <button onClick={() => firstPlay(playlistId)}><FontAwesomeIcon icon={faPlay}/></button>
+                <button onClick={() => load(playlistId)}><FontAwesomeIcon icon={faPlay}/></button>
             : 
                 context.isLoaded && context.isPlayingId == songId ? 
                 <>
@@ -85,7 +85,7 @@ function PlaySong(data){
                     }
                 </> 
                 : 
-                <button onClick={() => firstPlay(songId)}><FontAwesomeIcon icon={faPlay}/></button>
+                <button onClick={() => load(songId)}><FontAwesomeIcon icon={faPlay}/></button>
             }
         </div>
     </>

@@ -1,5 +1,6 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
+import ShareLinks from "./ShareLinks"
 
 function ArtistList(data) {
 
@@ -25,13 +26,15 @@ function ArtistList(data) {
         <article id="show-lists">
             {shortArtistList.map(content => (
                 <section key={number = number + 1} onClick={() => goToArtist(content.browseId)} style={{"--order": number}}>
-                    <div>
+                    <div className="thumbnail">
                         {getThumbnail(content.thumbnails)}{thumbnail60}
                     </div>
                     
-                    <div>
+                    <div className="content">
                         <h2>{content.name}</h2>
                     </div>
+
+                    <ShareLinks />
                 </section>
             ))}
         </article>

@@ -1,4 +1,6 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
+import ShareLinks from "./ShareLinks"
 
 function AlbumList(data) {
 
@@ -14,17 +16,20 @@ function AlbumList(data) {
     }
 
     return <>
-        {shortAlbumList.length ? <h2>Albums</h2> : <h2>No Albums Found</h2>}
+        {shortAlbumList.length ? <h2 style={{textDecoration: "line-through"}}>Albums</h2> : <h2>No Albums Found</h2>}
         <article id="show-lists">
             {shortAlbumList.map(content => (
                 <section key={number = number + 1} style={{"--order": number}}>
-                    <div>
+                    <div className="thumbnail">
                         {getThumbnail(content.thumbnails)}{thumbnail60}
                     </div>
                     
-                    <div>
+                    <div className="content">
                         <h2>{content.name}</h2>
+                        <p>{content.artist}</p>
                     </div>
+
+                    <ShareLinks />
                 </section>
             ))}
         </article>

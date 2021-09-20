@@ -130,7 +130,7 @@ function PlayBar(){
                     <button className="active" onClick={jumpNext}><FontAwesomeIcon icon={faAngleDoubleRight}/></button>
                 </div>
                 
-                <div>
+                <div className="volume">
                     <FontAwesomeIcon icon={faVolumeDown}/>
                     <input className="volume-slider" type="range" min="0" max="50" value={context.volume} onChange={(e) => {changeVolume(e.target.value)}} onClick={(e) => {changeVolume(e.target.value)}} />
                     <FontAwesomeIcon icon={faVolumeUp}/>
