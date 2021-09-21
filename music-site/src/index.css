@@ -305,7 +305,7 @@ input[type=range].played-slider::-webkit-slider-thumb{
 #show-lists>section>div>h3{
   font-size: calc(90% + 0.4vw);
   margin: 0.5vh 0.5vw;
-  max-height: calc(16px + 1vw);
+  max-height: calc(16px + 0.4vw);
   overflow: hidden;
 }
 #show-lists>section>div>p{

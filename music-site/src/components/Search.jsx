@@ -24,11 +24,22 @@ function Search(){
     const history = useHistory()
 
     function pushSearch(){
-        history.push('/search/' + searchTerm + '/' + searchValue)
+        if(searchValue){
+            history.push('/search/' + searchTerm + '/' + searchValue)
+        }
+        else{
+            history.push('/search/' + searchTerm)
+        }
+        
     }
 
     useEffect(() => {
+
         switch(term){
+            case '':
+                setSearchTerm('search')
+                searchAll()
+            break
             case 'search':
                 searchAll()
             break
@@ -40,9 +51,7 @@ function Search(){
             break
         }
 
-        if(value){
-            submitSearch()
-        }
+        submitSearch()
     }, [term, value])
 
     async function submitSearch() {
@@ -54,7 +63,8 @@ function Search(){
         setShortArtistList([])
         setShortAlbumList([])
         
-        if(search != ''){
+        if(search){
+            console.log(search)
             await fetch('https://yt-music-api.herokuapp.com/api/yt/' + term + '/' + search)
             .then(async res => {
                 data = await res.json()
@@ -74,7 +84,6 @@ function Search(){
         setNoResult(false)
         
         if(val.length < 1){
-            setShortSongList(val.slice(0, 4))
             setNoResult(true)
         } 
         else if (searchTerm == 'search'){
@@ -103,7 +112,6 @@ function Search(){
             setShowAlbums(false)
         }
         else if (searchTerm == 'albums'){
-            console.log(val)
             setShortAlbumList(val)
             setShowAlbums(true)
             setShowSongs(false)

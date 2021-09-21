@@ -59,6 +59,9 @@ function App() {
             <Route path="/search/:term">
               <Search/>
             </Route>
+            <Route path="/search/">
+              <Search/>
+            </Route>
             <Route path="/">
               <Home/>
             </Route>
