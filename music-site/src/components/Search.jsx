@@ -1,23 +1,49 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useParams, useHistory } from "react-router-dom"
 
 import SongList from "./SongList"
 import ArtistList from "./ArtistList"
 import AlbumList from "./AlbumList"
 
 function Search(){
+    var { term, value } = useParams()
 
-    const [searchValue, searchValueUpdateMethod] = useState('')
-    const [searchTerm, setSearchTerm] = useState(['search']);
-    const [fullList, setFullList] = useState([]);
-    const [shortSongList, setShortSongList] = useState([]);
-    const [shortArtistList, setShortArtistList] = useState([]);
-    const [shortAlbumList, setShortAlbumList] = useState([]);
-    const [noResult, setNoResult] = useState(true);
+    const [searchValue, searchValueUpdateMethod] = useState(value)
+    const [searchTerm, setSearchTerm] = useState(term)
+    const [fullList, setFullList] = useState([])
+    const [shortSongList, setShortSongList] = useState([])
+    const [shortArtistList, setShortArtistList] = useState([])
+    const [shortAlbumList, setShortAlbumList] = useState([])
+    const [noResult, setNoResult] = useState(true)
 
-    const [showSongs, setShowSongs] = useState([false]);
-    const [showArtists, setShowArtists] = useState([false]);
-    const [showAlbums, setShowAlbums] = useState([false]);
+    const [showSongs, setShowSongs] = useState([false])
+    const [showArtists, setShowArtists] = useState([false])
+    const [showAlbums, setShowAlbums] = useState([false])
     var data
+
+    const history = useHistory()
+
+    function pushSearch(){
+        history.push('/search/' + searchTerm + '/' + searchValue)
+    }
+
+    useEffect(() => {
+        switch(term){
+            case 'search':
+                searchAll()
+            break
+            case 'songs':
+                searchSongs()
+            break
+            case 'artists':
+                searchArtists()
+            break
+        }
+
+        if(value){
+            submitSearch()
+        }
+    }, [term, value])
 
     async function submitSearch() {
         let search = searchValue
@@ -123,7 +149,7 @@ function Search(){
 
     const handleKeyPress = e => {
         if(e.key == "Enter"){
-            submitSearch()
+            pushSearch()
         }
     }
 
@@ -132,10 +158,10 @@ function Search(){
         <h1>Search</h1>
         <section>
             <input onKeyPress={handleKeyPress} value={searchValue} onChange={(e)=>searchValueUpdateMethod(e.target.value)}/>
-            <button onClick={submitSearch}>&gt;</button>
+            <button onClick={pushSearch}>&gt;</button>
         </section>
         <div>
-            <button id='searchAllButton' className='no-focus-button focus-button' onClick={searchAll}>All</button>
+            <button id='searchAllButton' className='no-focus-button' onClick={searchAll}>All</button>
             <button id='searchSongsButton' className='no-focus-button' onClick={searchSongs}>Songs</button>
             <button id='searchArtistsButton' className='no-focus-button' onClick={searchArtists}>Artists</button>
             <button style={{textDecoration: "line-through"}} id='searchAlbumsButton' className='no-focus-button' /*onClick={searchAlbums}*/>Albums</button>
@@ -144,36 +170,35 @@ function Search(){
         <div className="divider"></div>
 
         {noResult ?
-            <p>No Search Results Found</p> :
-        <>
-            {showSongs ? 
+            <p>No Search Results Found</p> 
+            :
             <>
+                {showSongs ? 
+                <>
 
-                <SongList shortSongList={shortSongList}/>
+                    <SongList shortSongList={shortSongList}/>
 
-                <div className="divider"></div>
-            </> : <></> }
-            
-            {showArtists ? 
-            <>
+                    <div className="divider"></div>
+                </> : <></> }
                 
-                <ArtistList shortArtistList={shortArtistList}/>
+                {showArtists ? 
+                <>
+                    
+                    <ArtistList shortArtistList={shortArtistList}/>
 
-                <div className="divider"></div>
-            </> : <></> }
+                    <div className="divider"></div>
+                </> : <></> }
 
-            {showAlbums ? 
-            <>
-                
-                <AlbumList shortAlbumList={shortAlbumList}/>
-                
-                <div className="divider"></div>
-            </> : <></> }
-
-        </>}
-        
-        
-        
+                {showAlbums ? 
+                <>
+                    
+                    <AlbumList shortAlbumList={shortAlbumList}/>
+                    
+                    <div className="divider"></div>
+                </> : <></> 
+            }
+            </>
+        }
     </div>
     </>
 }

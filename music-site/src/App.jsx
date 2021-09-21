@@ -42,7 +42,7 @@ function App() {
           <nav>
             <Link to="/"><FontAwesomeIcon icon={faHome}/></Link>
             <a className="empty-space"/>
-            <Link to="/search"><FontAwesomeIcon icon={faSearch}/></Link>
+            <Link to="/search/search"><FontAwesomeIcon icon={faSearch}/></Link>
           </nav>
           <div>
             
@@ -53,7 +53,10 @@ function App() {
             <Route path="/showsong/:name/:artist">
               <ShowSong/>
             </Route>
-            <Route path="/search">
+            <Route path="/search/:term/:value">
+              <Search/>
+            </Route>
+            <Route path="/search/:term">
               <Search/>
             </Route>
             <Route path="/">

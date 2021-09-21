@@ -12,6 +12,8 @@ function ShareLinks(data){
 
     function toggleShare(){
         setShow(!show)
+        setCopyArtist("")
+        setCopySong("")
     }
 
     function copyArtistLink(link){

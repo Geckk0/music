@@ -85,14 +85,13 @@ function ShowArtist() {
                     <ShareLinks artistId={id} songName={song.name} artistName={song.artist.name}/>
                 </section>
             ))}
-            {artistSongs.length == 5 ? <>
-                {showMoreSongs ? 
+            {showMoreSongs ? 
                 <article>
                     <ArtistSongList artist={artist.name}/>
                     <a onClick={toggleSongs}>Show Less Songs</a>
                 </article> 
-                : <a onClick={toggleSongs}>Show More Songs</a> }
-                </>: <> </>}
+                : <a onClick={toggleSongs}>Show More Songs</a> 
+            }
 
             <div className="divider"></div>
 
