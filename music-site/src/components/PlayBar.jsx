@@ -10,6 +10,8 @@ function PlayBar(){
     const [playedMinutes, setPlayedMinutes] = useState(0)
     const [totalSeconds, setTotalSeconds] = useState(0)
     const [totalMinutes, setTotalMinutes] = useState(0)
+    const [playedArtist, setPlayedArtist] = useState('')
+    const [playedSong, setPlayedSong] = useState('')
     
     
     function play(){
@@ -82,6 +84,15 @@ function PlayBar(){
                 setPlayedMinutes(computedMinute)
 
                 setVideoTime(player.getCurrentTime())
+                
+                if(context.playlist.length > 1){
+                    setPlayedArtist(context.playlist[player.getPlaylistIndex()].artist)
+                    setPlayedSong(context.playlist[player.getPlaylistIndex()].song)
+                }
+                else{
+                    setPlayedArtist(context.playedSong.artist.name)
+                    setPlayedSong(context.playedSong.name)
+                }
 
                 if(context.loopPlaylist == false && player.getPlayerState() == 0){
                     pause()
@@ -91,7 +102,7 @@ function PlayBar(){
         }
     
         return () => clearInterval(intervalId);
-    }, [context.isPlaying, context.loopPlaylist, context.isPlayingId])
+    }, [context.isPlaying, context.loopPlaylist, context.isPlayingId, context.playlist, context.playedSong, playedArtist, playedSong])
 
     //Move to time in song when moving progress bar
     function updateTime(val){
@@ -139,6 +150,12 @@ function PlayBar(){
                     <FontAwesomeIcon icon={faVolumeUp}/>
                 </div>
                 
+            </div>
+                
+            <div>
+                <p>{playedArtist}</p>
+                <p>-</p>
+                <p>{playedSong}</p>
             </div>
         </section> 
     </>

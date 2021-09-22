@@ -79,7 +79,11 @@ function ShowArtist() {
 
             {artistSongs.map(song => (
                 <section key={number = number + 1} style={{"--order": number}}>
-                    <PlaySong song={song} artist={artist.name}/>
+                    {artist.name ? 
+                        <PlaySong song={song} artist={artist.name}/>
+                        :
+                        <> </>
+                    }
 
                     <div style={{cursor: "pointer"}} onClick={() => goToSong(song.name)}>
                         <h3>{song.name}</h3>

@@ -24,9 +24,12 @@ function PlaySong(data){
             findSong(parseData)
         }
         else if(isPlaylist){
+            updateContext({
+                playlist: playlist
+            })
             setPlaylistId(playlist)
         }
-    })
+    }, [])
 
     function findSong(val) {
         if(!isPlaylist){
@@ -40,12 +43,18 @@ function PlaySong(data){
 
     function load(val){
         updateContext({
+            playedSong: song,
             isLoaded: true,
             isPlaying: true,
             isPlayingId: val,
             videoLength: player.getDuration()
         })
-        player.loadPlaylist(val)
+        if(Array.isArray(val)){
+            player.loadPlaylist(val.map(obj => obj.videoId))
+        }
+        else{
+            player.loadPlaylist(val)
+        }
         player.playVideo()
         player.setLoop(context.loopPlaylist)
     }

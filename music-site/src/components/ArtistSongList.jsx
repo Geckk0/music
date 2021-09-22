@@ -19,10 +19,9 @@ function ArtistSongList(data) {
             setSongList(data.content)
             let temp = []
             data.content.map(song => {
-                temp = [...temp, song.videoId]
+                temp = [...temp, {videoId: song.videoId, song: song.name, artist: song.artist.name}]
             })
             setPlaylist(temp)
-            
         })
         .catch(error => console.log(error))
     },[])
@@ -45,7 +44,11 @@ function ArtistSongList(data) {
         {songList.length ? 
         <div>
             <h2>Songs</h2>
-            <PlaySong isPlaylist={true} playlist={playlist} artist={artist}/>
+            {playlist.length > 1 ? 
+                <PlaySong isPlaylist={true} playlist={playlist} artist={artist}/>
+                :
+                <> </>
+            }
         </div> 
         : <h2>No Songs Found</h2>}
         <article id="show-lists">

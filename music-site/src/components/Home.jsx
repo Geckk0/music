@@ -11,15 +11,6 @@ function Home(){
     const secondWord = ['Space', 'Me', 'Leave', 'Im', 'Do', 'Give', '', 'Walk', 'Snow', 'Rain', '', 'Sun', 'Bad', 'Wolf', 'Good', 'Home']
     const thirdWord = ['Trips', 'Up', 'Monkeys', '', 'Legos', 'Butts', 'Hats', '', 'Roofs', 'Days', 'Face', 'Rocks']
 
-    function loadSong(id) {
-        updateContext({
-            isLoaded: true,
-            isPlaying: true,
-            isPlayingId: id
-        })
-        player.loadPlaylist(id)
-    }
-
     async function getRandomSentence(){
         let tempWord
         tempWord = firstWord[Math.floor(Math.random()*firstWord.length)]
@@ -35,8 +26,15 @@ function Home(){
             data = await res.json()
                 if(!content){
                     content = data.content[Math.floor(Math.random()*data.content.length)]
-                    loadSong(content.videoId)
+                    
                     setSong(content)
+                    updateContext({
+                        song: content,
+                        isLoaded: true,
+                        isPlaying: true,
+                        isPlayingId: content.videoId
+                    })
+                    player.loadPlaylist(content.videoId)
                 }
         })
         .catch(error => console.log(error))

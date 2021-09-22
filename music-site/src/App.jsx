@@ -23,9 +23,11 @@ function App() {
     isLoaded: false,
     isPlaying: false,
     isPlayingId: '',
+    playedSong: {},
     volume: 10,
     loopPlaylist: false,
-    shufflePlaylist: false
+    shufflePlaylist: false,
+    playlist: []
   })
 
   function updateContext(updates) {
