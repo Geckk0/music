@@ -136,6 +136,9 @@ input[type=range].volume-slider::-webkit-slider-thumb{
   color: white;
   font-size: calc(80% + 0.5vw);
 }
+#play-bar>div>div:nth-child(2)>p{
+ width: 85px;
+}
 input[type=range].played-slider{
   width: calc(100vw - 55px);
   background-color: transparent;
@@ -143,6 +146,7 @@ input[type=range].played-slider{
 }
 input[type=range].played-slider::-webkit-slider-runnable-track {
   margin-top: -10px ;
+  overflow: hidden;
   background: #ffffff;
   border-radius: 25px;
   height: 2px;
@@ -187,6 +191,17 @@ input[type=range].played-slider::-webkit-slider-thumb{
   max-width: calc(100vw - 55px);
   border-radius: 50vw;
   font-size: calc(120% + 4vw);
+}
+#home-page>section>div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+}
+#home-page>section>div>*{
+  font-size: calc(100% + 0.4vw);
+  cursor: pointer;
 }
 /*--------------------------------------Search Page--------------------------------------*/
 #search-page{
@@ -305,7 +320,7 @@ input[type=range].played-slider::-webkit-slider-thumb{
 #show-lists>section>div>h3{
   font-size: calc(90% + 0.4vw);
   margin: 0.5vh 0.5vw;
-  max-height: calc(16px + 0.4vw);
+  max-height: calc(16px + 0.6vw);
   overflow: hidden;
 }
 #show-lists>section>div>p{
@@ -336,6 +351,11 @@ input[type=range].played-slider::-webkit-slider-thumb{
   display: flex;
   justify-content: space-between;
   width: 80vw;
+}
+#artist-page>.artist-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #artist-page h2{
   font-size: calc(130% + 1vw);
@@ -415,6 +435,7 @@ input[type=range].played-slider::-webkit-slider-thumb{
   font-size: calc(130% + 1vw);
   color: white;
   margin: 1vh 0;
+  display: flex;
 }
 /*--------------------------------------Player--------------------------------------*/
 #player{
@@ -444,6 +465,7 @@ input[type=range].played-slider::-webkit-slider-thumb{
 #share-links>button{
   background-color: transparent;
   border: none;
+  color: white;
 }
 #share-links>section{
   position: absolute;
@@ -485,11 +507,6 @@ input[type=range].played-slider::-webkit-slider-thumb{
     flex-grow: 1;
     margin: 0 5vw;
   }
-}
-@media screen and (max-width: 400px) { 
-  #home-page>img{
-    max-width: 100vw;
-  }
   #play-bar{
     width: 100vw;
     background-image: none;
@@ -500,6 +517,11 @@ input[type=range].played-slider::-webkit-slider-thumb{
   }
   input[type=range].volume-slider {
     max-width: calc(100vw - 60px);
+  }
+}
+@media screen and (max-width: 400px) { 
+  #home-page>img{
+    max-width: 100vw;
   }
   #home-page>section>button{
     max-width: calc(100vw - 10px);

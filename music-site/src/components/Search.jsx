@@ -34,7 +34,6 @@ function Search(){
     }
 
     useEffect(() => {
-
         switch(term){
             case '':
                 setSearchTerm('search')
@@ -155,6 +154,7 @@ function Search(){
         setSearchTerm('albums')
     }
 
+    //Search on pressing enter
     const handleKeyPress = e => {
         if(e.key == "Enter"){
             pushSearch()

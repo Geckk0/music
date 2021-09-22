@@ -55,42 +55,45 @@ function PlayBar(){
         player.setVolume(context.volume)
     }
     
+    //Loop counter on load
     useEffect(() => {
         let intervalId;
-    
+        
+        //Counter only active when song playing
         if (context.isPlaying) {
-          intervalId = setInterval(() => {
+            intervalId = setInterval(() => {
             
-            const totSecondCounter = Math.floor(player.getDuration() % 60)
-            const totMinuteCounter = Math.floor(player.getDuration() / 60)
+                const totSecondCounter = Math.floor(player.getDuration() % 60)
+                const totMinuteCounter = Math.floor(player.getDuration() / 60)
 
-            const totComputedSecond = String(totSecondCounter).length === 1 ? `0${totSecondCounter}`: totSecondCounter
-            const totComputedMinute = String(totMinuteCounter)
-            
-            setTotalSeconds(totComputedSecond)
-            setTotalMinutes(totComputedMinute)
-            
-            const secondCounter = Math.floor(player.getCurrentTime() % 60)
-            const minuteCounter = Math.floor(player.getCurrentTime() / 60)
+                const totComputedSecond = String(totSecondCounter).length === 1 ? `0${totSecondCounter}`: totSecondCounter
+                const totComputedMinute = String(totMinuteCounter)
+                
+                setTotalSeconds(totComputedSecond)
+                setTotalMinutes(totComputedMinute)
+                
+                const secondCounter = Math.floor(player.getCurrentTime() % 60)
+                const minuteCounter = Math.floor(player.getCurrentTime() / 60)
 
-            const computedSecond = String(secondCounter).length === 1 ? `0${secondCounter}`: secondCounter
-            const computedMinute = String(minuteCounter)
-            
-            setPlayedSeconds(computedSecond)
-            setPlayedMinutes(computedMinute)
+                const computedSecond = String(secondCounter).length === 1 ? `0${secondCounter}`: secondCounter
+                const computedMinute = String(minuteCounter)
+                
+                setPlayedSeconds(computedSecond)
+                setPlayedMinutes(computedMinute)
 
-            setVideoTime(player.getCurrentTime())
+                setVideoTime(player.getCurrentTime())
 
-            if(player.getCurrentTime() == player.getDuration() && context.loopPlaylist == false && context.isPlayingId.length < 2){
-                pause()
-            }
+                if(context.loopPlaylist == false && player.getPlayerState() == 0){
+                    pause()
+                }
 
-          }, 1000)
+            }, 1000)
         }
     
         return () => clearInterval(intervalId);
     }, [context.isPlaying, context.loopPlaylist, context.isPlayingId])
 
+    //Move to time in song when moving progress bar
     function updateTime(val){
         player.seekTo(val, true)
         setVideoTime(val)

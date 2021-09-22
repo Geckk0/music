@@ -14,6 +14,7 @@ function PlaySong(data){
     var playlist = data.playlist
     var isPlaylist = data.isPlaylist
 
+    //Get song on load
     useEffect(async ()=>{
         if(!isPlaylist){
             await fetch('https://yt-music-api.herokuapp.com/api/yt/songs/' + song.name)
@@ -65,12 +66,12 @@ function PlaySong(data){
     return <>
         <div id="player">
             {isPlaylist ? 
-                context.isLoaded && context.isPlayingId === playlistId ? 
+                context.isLoaded && context.isPlayingId == playlistId ? 
                 <>
                     {context.isPlaying ? 
-                        <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> 
+                        <button onClick={() => pause}><FontAwesomeIcon icon={faPause}/></button> 
                         : 
-                        <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>
+                        <button onClick={() => play}><FontAwesomeIcon icon={faPlay}/></button>
                     }
                 </> 
                 : 
@@ -79,9 +80,9 @@ function PlaySong(data){
                 context.isLoaded && context.isPlayingId == songId ? 
                 <>
                     {context.isPlaying ? 
-                        <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> 
+                        <button onClick={() => pause}><FontAwesomeIcon icon={faPause}/></button> 
                         : 
-                        <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>
+                        <button onClick={() => play}><FontAwesomeIcon icon={faPlay}/></button>
                     }
                 </> 
                 : 

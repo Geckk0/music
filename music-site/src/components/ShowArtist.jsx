@@ -5,7 +5,6 @@ import ArtistSongList from "./ArtistSongList"
 import ShareLinks from "./ShareLinks"
 
 function ShowArtist() {
-
     const [artist, setArtist] = useState([])
     const [artistSongs, setArtistSongs] = useState([])
     const [artistAlbums, setArtistAlbums] = useState([])
@@ -43,7 +42,8 @@ function ShowArtist() {
         thumbnails.map(thumbnail => {
             if(thumbnail.width == 226){
                 thumbnail226 = <img src={thumbnail.url} alt="" />
-            }})
+            }
+        })
     }
 
     function toggleSongs(){
@@ -52,17 +52,21 @@ function ShowArtist() {
 
     const history = useHistory()
 
-    function goToSong(name, artist) {
-        if(artist.length > 1){
-            artist = artist[0]
-        }
+    function goToSong(name) {
         history.push('/showsong/' + name + '/' + artist.name)
     }
 
     return <>
         <div id='artist-page'>
             {thumbnail816}
-            <h2>{artist.name ? artist.name : "No Artist Found"}</h2>
+            {artist.name ? 
+                <div className="artist-name">
+                    <h2>{artist.name}</h2> 
+                    <ShareLinks artistId={id}/>
+                </div> 
+                : 
+                <h2>No Artist Found</h2>
+            }
 
             <div className="divider"></div>
 
@@ -77,7 +81,7 @@ function ShowArtist() {
                 <section key={number = number + 1} style={{"--order": number}}>
                     <PlaySong song={song} artist={artist.name}/>
 
-                    <div style={{cursor: "pointer"}} onClick={() => goToSong(song.name, song.artist)}>
+                    <div style={{cursor: "pointer"}} onClick={() => goToSong(song.name)}>
                         <h3>{song.name}</h3>
                         <p>{song.album.name}</p>
                     </div>
@@ -90,7 +94,12 @@ function ShowArtist() {
                     <ArtistSongList artist={artist.name}/>
                     <a onClick={toggleSongs}>Show Less Songs</a>
                 </article> 
-                : <a onClick={toggleSongs}>Show More Songs</a> 
+                : 
+                artistSongs.length == 5 ? 
+                    <a onClick={toggleSongs}>Show More Songs</a> 
+                    :
+                    <> </>
+                    
             }
 
             <div className="divider"></div>

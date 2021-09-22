@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom"
 import ShareLinks from "./ShareLinks"
 
 function ArtistList(data) {
-
     var thumbnail60
     var shortArtistList = data.shortArtistList
     var number = 0

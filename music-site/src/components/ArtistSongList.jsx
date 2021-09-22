@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import PlaySong from "./PlaySong"
+import ShareLinks from "./ShareLinks"
 
 function ArtistSongList(data) {
-const [songList, setSongList] = useState([])
-const [playlist, setPlaylist] = useState([])
+    const [songList, setSongList] = useState([])
+    const [playlist, setPlaylist] = useState([])
 
     var thumbnail60, data
     var artist = data.artist
     var number = 0
 
+    //Get artist on page load
     useEffect(async ()=>{
         await fetch('https://yt-music-api.herokuapp.com/api/yt/songs/' + artist)
         .then(async res => {
@@ -60,6 +62,8 @@ const [playlist, setPlaylist] = useState([])
                         <h3>{content.name}</h3>
                         <p>{content.artist.name}</p>
                     </div>
+
+                    <ShareLinks artistId={content.artist.browseId} songName={content.name} artistName={content.artist.name} videoId={content.videoId}/>
                 </section>
             ))}
         </article>

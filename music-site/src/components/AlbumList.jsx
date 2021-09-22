@@ -1,9 +1,6 @@
 import React from "react"
-import { useHistory } from "react-router-dom"
-import ShareLinks from "./ShareLinks"
 
 function AlbumList(data) {
-
     var thumbnail60
     var shortAlbumList = data.shortAlbumList
     var number = 0

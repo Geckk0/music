@@ -4,7 +4,6 @@ import PlaySong from "./PlaySong"
 import ShareLinks from "./ShareLinks"
 
 function SongList(data) {
-
     var thumbnail60
     var shortSongList = data.shortSongList
     var number = 0

@@ -17,7 +17,7 @@ function ShareLinks(data){
     }
 
     function copyArtistLink(link){
-        console.log(link)
+        //Set, select and copy value in offscreen textarea
         textRef.current.value = link
         textRef.current.select();
         document.execCommand('copy')
@@ -26,7 +26,7 @@ function ShareLinks(data){
     }
 
     function copySongLink(link){
-        console.log(link)
+        //Set, select and copy value in offscreen textarea
         textRef.current.value = link
         textRef.current.select();
         document.execCommand('copy')
@@ -36,6 +36,7 @@ function ShareLinks(data){
 
     return <>
         <div id="share-links">
+            {/* Create text area to set links when copying */}
             <textarea ref={textRef} style={{ opacity: 0, position: "absolute", top: "-2000px" }}></textarea>
             <button onClick={toggleShare}>. . .</button>
             {show ? 

@@ -4,7 +4,6 @@ import PlaySong from "./PlaySong"
 import ShareLinks from "./ShareLinks"
 
 function ShowSong() {
-
     const [song, setSong] = useState([])
     const [thumbnail120, setThumbnail120] = useState()
 
@@ -46,7 +45,10 @@ function ShowSong() {
             <h2 style={{cursor: "pointer"}} onClick={() => goToArtist(song.artist)}>{artist}</h2>
 
             <div className="divider"></div>
-            <h2>{song.name}</h2>
+            <h2>
+                {song.name}
+                <ShareLinks songName={song.name} artistName={artist}/>
+            </h2>
 
             <PlaySong song={song} artist={artist}/>
         </div>
