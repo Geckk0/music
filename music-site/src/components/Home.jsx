@@ -29,7 +29,7 @@ function Home(){
                     
                     setSong(content)
                     updateContext({
-                        song: content,
+                        playedSong: content,
                         isLoaded: true,
                         isPlaying: true,
                         isPlayingId: content.videoId

@@ -54,6 +54,30 @@ body>div>div>div{
   from {transform: translateX(0xp)}
   to {transform: translateX(0px);}
 }
+@keyframes slideh {
+  0% { transform: translateX(100vw) }
+  20% { transform: translateX(50vw) }
+  40% { transform: translateX(0vw) }
+  60% { transform: translateX(0vw) }
+  80% { transform: translateX(-50vw) }
+  100% { transform: translateX(-100vw) }
+}
+/*--------------------------------------Player--------------------------------------*/
+#player{
+  display: flex;
+  flex-direction: row;
+}
+#player>button{
+  background-color: rgba(102, 105, 114, 1);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 10vw;
+  font-size: calc(100% + 0.7vw);
+  margin: 5px;
+  flex-shrink: 0;
+}
 /*--------------------------------------Nav Bar--------------------------------------*/
 nav{
   display: flex;
@@ -162,6 +186,7 @@ input[type=range].played-slider::-webkit-slider-thumb{
   cursor: pointer;
   -webkit-appearance: none;
 }
+.slide { animation: slideh linear 10s infinite; }
 /*--------------------------------------Home Page--------------------------------------*/
 #home-page{
   flex-grow: 1;
@@ -172,7 +197,7 @@ input[type=range].played-slider::-webkit-slider-thumb{
   overflow-x: hidden
 }
 #home-page>img{
-  width: 300px;
+  width: 200px;
   background-color: rgba(102, 105, 114, 0.3);
   border-radius: 100%;
   margin-top: 2vh;
@@ -437,22 +462,6 @@ input[type=range].played-slider::-webkit-slider-thumb{
   color: white;
   margin: 1vh 0;
   display: flex;
-}
-/*--------------------------------------Player--------------------------------------*/
-#player{
-  display: flex;
-  flex-direction: row;
-}
-#player>button{
-  background-color: rgba(102, 105, 114, 1);
-  color: white;
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 10vw;
-  font-size: calc(100% + 0.7vw);
-  margin: 5px;
-  flex-shrink: 0;
 }
 /*--------------------------------------Share Links--------------------------------------*/
 #share-links{

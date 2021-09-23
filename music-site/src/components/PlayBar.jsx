@@ -85,7 +85,7 @@ function PlayBar(){
 
                 setVideoTime(player.getCurrentTime())
                 
-                if(context.playlist.length > 1){
+                if(Array.isArray(context.isPlayingId)){
                     setPlayedArtist(context.playlist[player.getPlaylistIndex()].artist)
                     setPlayedSong(context.playlist[player.getPlaylistIndex()].song)
                 }
@@ -152,7 +152,7 @@ function PlayBar(){
                 
             </div>
                 
-            <div>
+            <div className="slide">
                 <p>{playedArtist}</p>
                 <p>-</p>
                 <p>{playedSong}</p>

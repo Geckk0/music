@@ -78,9 +78,9 @@ function PlaySong(data){
                 context.isLoaded && context.isPlayingId == playlistId ? 
                 <>
                     {context.isPlaying ? 
-                        <button onClick={() => pause}><FontAwesomeIcon icon={faPause}/></button> 
+                        <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> 
                         : 
-                        <button onClick={() => play}><FontAwesomeIcon icon={faPlay}/></button>
+                        <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>
                     }
                 </> 
                 : 
@@ -89,9 +89,9 @@ function PlaySong(data){
                 context.isLoaded && context.isPlayingId == songId ? 
                 <>
                     {context.isPlaying ? 
-                        <button onClick={() => pause}><FontAwesomeIcon icon={faPause}/></button> 
+                        <button onClick={pause}><FontAwesomeIcon icon={faPause}/></button> 
                         : 
-                        <button onClick={() => play}><FontAwesomeIcon icon={faPlay}/></button>
+                        <button onClick={play}><FontAwesomeIcon icon={faPlay}/></button>
                     }
                 </> 
                 : 
